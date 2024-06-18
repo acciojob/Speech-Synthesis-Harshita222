@@ -1,4 +1,3 @@
-// Your script here.
 const msg = new SpeechSynthesisUtterance();
 let voices = [];
 const voicesDropdown = document.querySelector('[name="voice"]');
@@ -8,7 +7,7 @@ const stopButton = document.querySelector('#stop');
 msg.text = document.querySelector('[name="text"]').value;
 
 function populateVoices() {
-  voices = this.getVoices();
+  voices = speechSynthesis.getVoices();
   voicesDropdown.innerHTML = voices
     .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
     .join('');
@@ -23,7 +22,7 @@ function setOption() {
 }
 
 function speak() {
-  speechSynthesis.cancel(); // Prevents queueing up speechsynthesis requests
+  speechSynthesis.cancel(); // Prevents queueing up speech synthesis requests
   speechSynthesis.speak(msg);
 }
 
